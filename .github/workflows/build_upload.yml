@@ -28,3 +28,5 @@ jobs:
       run: |
         ls -altr $GITHUB_WORKSPACE
         ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
+        ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
+        ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
