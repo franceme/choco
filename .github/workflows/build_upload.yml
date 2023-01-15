@@ -1,0 +1,59 @@
+name: Chocolatey Builds
+
+on:
+  # Trigger on pushes and on pull requests
+  push:
+  pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+
+    steps:
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.0
+        with:
+          format: 'YYYY-MM-DD-HH-mm'
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: Release_${{ steps.time.outputs.time }}
+          release_name: Release_${{ steps.time.outputs.time }}
+          body: Release_${{ steps.time.outputs.time }}
+  # Build on Windows
+  windows-build:
+    needs: create_release
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Cache Tools
+      uses: actions/cache@v3.0.11
+      with:
+        path: tools
+        key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
+    - name: Build with .Net Framework
+      run: ./build.ps1 --verbosity=diagnostic --target=CI --testExecutionType=all --shouldRunOpenCover=false
+    - name: Showcase
+      run: dir
+    - name: Upload coverage results to the Release
+        id: upload-release-asset-resume
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }} #${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/cryptoguard4py.sh
+          asset_name: cryptoguard4py_${{ matrix.config.os }}.sh
+          asset_content_type: application/x-sh
