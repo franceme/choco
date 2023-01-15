@@ -27,3 +27,4 @@ jobs:
     - name: Show
       run: |
         ls -altr $GITHUB_WORKSPACE
+        ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
