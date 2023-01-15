@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AF584111-FE32-448D-A1D0-63217AF8B43C}</ProjectGuid>
-    <OutputType>Application</OutputType>
+    <OutputType>Module</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>chocolatey.resources</RootNamespace>
     <AssemblyName>chocolatey.resources</AssemblyName>
