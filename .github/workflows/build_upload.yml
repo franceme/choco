@@ -22,6 +22,6 @@ jobs:
         path: tools
         key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
     - name: Build with .Net Framework
-      run: ./build.ps1 --verbosity=diagnostic --target=CI --testExecutionType=all --shouldRunOpenCover=false
+      run: ./build.ps1
     - name: Showcase
       run: dir
