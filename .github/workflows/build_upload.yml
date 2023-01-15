@@ -23,10 +23,11 @@ jobs:
     - name: Build with Mono
       run: |
         chmod +x build.sh
-        $GITHUB_WORKSPACE//build.official.sh
+        $GITHUB_WORKSPACE//build.official.sh --testExecutionType=all
     - name: Show
       run: |
         ls -altr $GITHUB_WORKSPACE
         ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
+        ls -altr $GITHUB_WORKSPACE/code_drop/
         ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
         ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
