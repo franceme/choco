@@ -286,6 +286,7 @@ Chocolatey is not an official build (bypassed with --allow-unofficial).
 
         public void warn_when_admin_needs_elevation(ChocolateyConfiguration config)
         {
+            return;
             if (config.HelpRequested) return;
 
             // skip when commands will set or for background mode
