@@ -9,9 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Build on Windows
-  windows-build:
-    runs-on: windows-2019
+  ubuntu-build:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       with:
@@ -21,7 +20,10 @@ jobs:
       with:
         path: tools
         key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
-    - name: Build with .Net Framework
-      run: ./build.ps1
-    - name: Showcase
-      run: dir
+    - name: Build with Mono
+      run: |
+        chmod +x build.sh
+        $GITHUB_WORKSPACE//build.official.sh
+    - name: Show
+      run: |
+        ls -altr $GITHUB_WORKSPACE
