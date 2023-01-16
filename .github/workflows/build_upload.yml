@@ -29,3 +29,6 @@ jobs:
     - name: Show
       run: dir
 
+    - name: Show
+      run: dir tests/
+
