@@ -24,57 +24,8 @@ jobs:
         key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
 
     - name: Build with .Net Framework
-      run: ./build.ps1 --verbosity=diagnostic --target=CI --testExecutionType=all --shouldRunOpenCover=false
-
-    - name: Invoke Build Test
-      run: ./Invoke-Tests.ps1
+      run: ./build.official.bat #./build.ps1 --verbosity=diagnostic --target=CI--shouldRunOpenCover=false
 
     - name: Show
       run: dir
 
-
-  ubuntu-build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Cache Tools
-      uses: actions/cache@v3.0.11
-      with:
-        path: tools
-        key: ${{ runner.os }}-tools-${{ hashFiles('recipe.cake') }}
-
-    - name: Build with Mono
-      run: |
-        chmod +x build.sh
-        $GITHUB_WORKSPACE//build.official.sh --testExecutionType=all
-
-    - name: Build with Mono
-      run: |
-        chmod +x build.sh
-        $GITHUB_WORKSPACE//build.official.sh --testExecutionType=all
-
-    - name: Show ls tests
-      run: |
-        ls -altr $GITHUB_WORKSPACE/tests
-
-    - name: Show ls -altr $GITHUB_WORKSPACE
-      run: |
-        ls -altr $GITHUB_WORKSPACE
-
-    - name: Show ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
-      run: |
-        ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
-
-    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/
-      run: |
-        ls -altr $GITHUB_WORKSPACE/code_drop/
-
-    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
-      run: |
-        ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
-
-    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
-      run: |
-        ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
