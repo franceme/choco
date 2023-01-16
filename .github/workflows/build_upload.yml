@@ -24,10 +24,23 @@ jobs:
       run: |
         chmod +x build.sh
         $GITHUB_WORKSPACE//build.official.sh --testExecutionType=all
-    - name: Show
+
+    - name: Show ls -altr $GITHUB_WORKSPACE
       run: |
         ls -altr $GITHUB_WORKSPACE
+
+    - name: Show ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
+      run: |
         ls -altr $GITHUB_WORKSPACE/src/chocolatey.resources/bin/ReleaseOfficial
+
+    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/
+      run: |
         ls -altr $GITHUB_WORKSPACE/code_drop/
+
+    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
+      run: |
         ls -altr $GITHUB_WORKSPACE/code_drop/Packages/
+
+    - name: Show ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
+      run: |
         ls -altr $GITHUB_WORKSPACE/code_drop/Packages/NuGet/*.nupkg
