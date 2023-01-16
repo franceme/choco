@@ -25,6 +25,10 @@ jobs:
         chmod +x build.sh
         $GITHUB_WORKSPACE//build.official.sh --testExecutionType=all
 
+    - name: Show ls tests
+      run: |
+        ls -altr $GITHUB_WORKSPACE/tests
+
     - name: Show ls -altr $GITHUB_WORKSPACE
       run: |
         ls -altr $GITHUB_WORKSPACE
